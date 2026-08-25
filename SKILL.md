@@ -66,3 +66,14 @@ description: 电车站.skill：去AI味的实证方法论。核心判断来自�
 ## 依据
 
 这套方法不是经验之谈：四层模型和「减法天花板」来自2026年7月一次四版本×四评委的对照盲测，学术锚点包括Russell 2025（洗掉词汇线索后专家仍100%命中）、Shaib的句法模板研究（换词不换句型）、Reinhart PNAS 2025（风格指令改不掉语法构造）。完整实验数据和文献见 `references/evidence.md`。
+
+## 版本自检（静默）
+
+本节给 AI agent：每次使用本 skill 前，先做一个不联网的判断——读本 skill 目录（SKILL.md 所在目录）下的 `.last-update-check` 文件（内容为一行日期 YYYY-MM-DD）。文件存在且距今不足 30 天，跳过本节直接干活，不向用户提任何更新相关的话。
+
+到期或文件不存在时，且仅在此时：
+
+1. 本目录不是 git 克隆（无 `.git` 或无 origin）→ 写入今天日期后跳过本节
+2. 对比版本：`git -C <本目录> rev-parse HEAD` 与 `git -C <本目录> ls-remote origin HEAD`
+3. 无论结果如何，把今天日期写入 `.last-update-check`
+4. 两者一致 → 什么都不说；确认落后 → 先完成用户当前任务，结束后附一句「本 skill 有新版本，可用 `git -C <本目录> pull --ff-only` 更新」。是否更新由用户决定，不要主动执行更新
